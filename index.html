@@ -1,0 +1,709 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Diagnosing Top-of-Funnel Conversion Decline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-card {
+            background-color: #003459;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            text-align: center;
+        }
+        .kpi-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #FFD166;
+        }
+        .kpi-delta-negative {
+            color: #FF6B6B;
+            font-weight: 700;
+        }
+        .kpi-delta-positive {
+            color: #4CAF50;
+            font-weight: 700;
+        }
+        .flowchart-step {
+            background-color: #007EA7;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 500;
+            flex-grow: 1;
+            margin: 0 0.5rem;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            color: #003459;
+            align-self: center;
+        }
+        .appzen-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #003459;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .appzen-logo span {
+            color: #00A8E8;
+        }
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .filter-group label {
+            font-weight: 500;
+            color: #003459;
+            margin-right: 0.5rem;
+        }
+        .filter-group select {
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #003459;
+            cursor: pointer;
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <div class="appzen-logo">App<span>Zen</span></div>
+            <h1 class="text-4xl md:text-5xl font-black text-[#003459] mb-2">Diagnosing the Conversion Decline</h1>
+            <p class="text-lg text-[#007EA7]">An Interactive Analysis of Product X's Top-of-Funnel Performance</p>
+        </header>
+
+        <section id="filters" class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold text-center text-[#003459] mb-4">Filter Data for Deeper Insights</h2>
+            <div class="filter-group">
+                <div>
+                    <label for="quarterFilter">Quarter:</label>
+                    <select id="quarterFilter">
+                        <option value="Q2 '25">Q2 '25</option>
+                        <option value="Q1 '25">Q1 '25</option>
+                        <option value="Q4 '24">Q4 '24</option>
+                        <option value="Q3 '24">Q3 '24</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="repFilter">Sales Rep:</label>
+                    <select id="repFilter">
+                        <option value="All">All Reps</option>
+                        <option value="Rep A">Rep A</option>
+                        <option value="Rep B">Rep B</option>
+                        <option value="Rep C">Rep C</option>
+                        <option value="Rep D">Rep D</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sourceFilter">Lead Source:</label>
+                    <select id="sourceFilter">
+                        <option value="All">All Sources</option>
+                        <option value="Organic Search">Organic Search</option>
+                        <option value="Paid Ads">Paid Ads</option>
+                        <option value="Referrals">Referrals</option>
+                        <option value="Events">Events</option>
+                        <option value="Content Syndication">Content Syndication</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="campaignFilter">Campaign:</label>
+                    <select id="campaignFilter">
+                        <option value="All">All Campaigns</option>
+                        <option value="Product X Launch Campaign">Product X Launch Campaign</option>
+                        <option value="Product X Retargeting">Product X Retargeting</option>
+                        <option value="Product X Content Series">Product X Content Series</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section id="kpis" class="mb-12">
+            <h2 class="text-2xl font-bold text-center text-[#003459] mb-4">The Alarming Trend: Key Performance Indicators</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-8">
+                A sharp drop in the lead-to-opportunity conversion rate for Product X signals a critical issue at the top of our sales funnel. This decline, coupled with other negative trends, requires immediate investigation to understand the root causes and reverse the damage.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-1 text-[#003459]">Lead-to-Opportunity Conversion Rate Trend</h3>
+                    <p class="text-sm text-gray-500 mb-4">The primary metric shows a consistent decline over the past year, falling well below our goal.</p>
+                    <div class="chart-container h-64 md:h-80 max-h-[350px]">
+                        <canvas id="conversionTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="font-semibold mb-2">Lead Volume</h3>
+                    <p class="kpi-value" id="kpiLeadVolume">1,500</p>
+                    <p class="text-lg">vs. <span id="kpiLeadVolumePrev">1,600</span> last quarter</p>
+                    <p class="kpi-delta-negative" id="kpiLeadVolumeDelta">-6.25%</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="font-semibold mb-2">Average Lead Response Time</h3>
+                    <p class="kpi-value" id="kpiResponseTime">3.0 <span class="text-2xl">hrs</span></p>
+                    <p class="text-lg">vs. <span id="kpiResponseTimePrev">2.0</span> hrs last quarter</p>
+                    <p class="kpi-delta-negative" id="kpiResponseTimeDelta">+50% Slower</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="font-semibold mb-2">Target Conversion Rate</h3>
+                    <p class="kpi-value" id="kpiTargetConversion">15%</p>
+                    <p class="text-lg">Current: <span id="kpiCurrentConversion">8%</span></p>
+                    <p class="kpi-delta-negative" id="kpiConversionDelta">7 p.p. Below Goal</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="framework" class="my-16">
+            <h2 class="text-2xl font-bold text-center text-[#003459] mb-4">Our Diagnostic Framework</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-8">
+                To systematically identify the problem, we follow a structured three-step process. This ensures we gather comprehensive data and involve the right people before jumping to conclusions.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center">
+                 <div class="flowchart-step">1. Ask Questions</div>
+                 <div class="flowchart-arrow mx-4 my-2 md:my-0">→</div>
+                 <div class="flowchart-step">2. Review Data</div>
+                 <div class="flowchart-arrow mx-4 my-2 md:my-0">→</div>
+                 <div class="flowchart-step">3. Involve Stakeholders</div>
+            </div>
+        </section>
+
+
+        <section id="analysis" class="mb-12">
+            <h2 class="text-2xl font-bold text-center text-[#003459] mb-4">Where is the Funnel Leaking?</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-8">
+                By segmenting our conversion data, we can pinpoint the exact areas of underperformance. The data reveals significant drops in specific lead sources, marketing campaigns, and even individual sales representative performance, indicating a multi-faceted problem.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-1 text-[#003459]">Conversion Rate by Lead Source</h3>
+                    <p class="text-sm text-gray-500 mb-4">Paid Ads and Content Syndication are converting at alarmingly low rates compared to more reliable sources like referrals.</p>
+                    <div class="chart-container">
+                        <canvas id="sourceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-1 text-[#003459]">Conversion Rate by Sales Rep</h3>
+                     <p class="text-sm text-gray-500 mb-4">Performance varies significantly across the team, highlighting potential coaching and training opportunities for specific reps.</p>
+                    <div class="chart-container">
+                        <canvas id="repChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2 lg:col-span-1">
+                    <h3 class="font-bold text-lg mb-1 text-[#003459]">Conversion Rate by Campaign</h3>
+                     <p class="text-sm text-gray-500 mb-4">While the launch campaign performed well, newer content and retargeting efforts are failing to convert leads effectively.</p>
+                    <div class="chart-container">
+                        <canvas id="campaignChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="root-cause" class="mb-12">
+            <h2 class="text-2xl font-bold text-center text-[#003459] mb-4">Why Is It Leaking? Root Cause Analysis</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-8">
+                Digging deeper, we analyze why leads are being disqualified and assess the overall quality of incoming leads. A high percentage of leads being a "poor fit" suggests a targeting problem, which is further supported by the distribution of lead quality scores.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-1 text-[#003459]">Top Reasons for Disqualification</h3>
+                    <p class="text-sm text-gray-500 mb-4">A large portion of leads are disqualified for not being a good fit, pointing to issues in our marketing targeting or messaging.</p>
+                    <div class="chart-container">
+                        <canvas id="disqualificationChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-1 text-[#003459]">Lead Quality Score Distribution</h3>
+                    <p class="text-sm text-gray-500 mb-4">The data shows a concerning concentration of leads in the lower-quality tiers, indicating we are attracting the wrong audience.</p>
+                    <div class="chart-container">
+                        <canvas id="leadScoreChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="next-steps" class="mb-12">
+            <h2 class="text-2xl font-bold text-center text-[#003459] mb-4">The Path Forward: Recommended Actions</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-8">
+                Based on our analysis, we recommend a three-pronged approach to address the conversion decline. These steps focus on refining our marketing efforts, empowering our sales team, and improving our internal processes for a sustainable long-term solution.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-[#00A8E8]">
+                    <h3 class="font-bold text-xl mb-3 text-[#003459]">1. Deep Dive on Campaigns</h3>
+                    <p class="text-gray-600">Analyze the content, targeting, and messaging of underperforming campaigns (Paid Ads, Content Syndication). A/B test new creative and copy to better align with our Ideal Customer Profile and set proper expectations.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-[#FFD166]">
+                    <h3 class="font-bold text-xl mb-3 text-[#003459]">2. Targeted Sales Coaching</h3>
+                    <p class="text-gray-600">Provide specific training to underperforming reps on Product X qualification. Role-play handling common objections and refine discovery questions to better identify good-fit leads early in the process.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-[#FF6B6B]">
+                    <h3 class="font-bold text-xl mb-3 text-[#003459]">3. Refine Lead Scoring & SLA</h3>
+                    <p class="text-gray-600">Collaborate with marketing to revisit and adjust the lead scoring model for Product X. Ensure it accurately reflects lead quality. Review the Sales-Marketing SLA to guarantee timely follow-up on high-potential leads.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#003459';
+            const GRID_COLOR = '#d1d5db';
+            const PALETTE = {
+                blue1: '#00A8E8', // Light Blue
+                blue2: '#007EA7', // Medium Blue
+                blue3: '#003459', // Dark Blue (for text/backgrounds)
+                red: '#FF6B6B',   // Red (for negative trends/alerts)
+                yellow: '#FFD166', // Yellow (for warnings/highlights)
+                green: '#4CAF50', // Green (for positive trends)
+            };
+
+            const tooltipConfig = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            };
+
+            function wrapLabel(str, maxWidth = 16) {
+                if (str.length <= maxWidth) return str;
+                const words = str.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) lines.push(currentLine);
+                return lines;
+            }
+            
+            Chart.defaults.color = FONT_COLOR;
+            Chart.defaults.font.family = "'Inter', sans-serif";
+
+            // Raw data for filtering
+            const rawData = {
+                quarters: ['Q3 \'24', 'Q4 \'24', 'Q1 \'25', 'Q2 \'25'],
+                kpiData: {
+                    'Q3 \'24': { leadVolume: 1800, prevLeadVolume: 2000, responseTime: 1.5, prevResponseTime: 1.0, currentConversion: 14, prevConversion: 15 },
+                    'Q4 \'24': { leadVolume: 1700, prevLeadVolume: 1800, responseTime: 1.8, prevResponseTime: 1.5, currentConversion: 12, prevConversion: 14 },
+                    'Q1 \'25': { leadVolume: 1600, prevLeadVolume: 1700, responseTime: 2.0, prevResponseTime: 1.8, currentConversion: 10, prevConversion: 12 },
+                    'Q2 \'25': { leadVolume: 1500, prevLeadVolume: 1600, responseTime: 3.0, prevResponseTime: 2.0, currentConversion: 8, prevConversion: 10 },
+                },
+                conversionTrend: [
+                    { quarter: 'Q3 \'24', rate: 14 },
+                    { quarter: 'Q4 \'24', rate: 12 },
+                    { quarter: 'Q1 \'25', rate: 10 },
+                    { quarter: 'Q2 \'25', rate: 8 },
+                ],
+                detailedConversion: [
+                    // Q3 '24 Data
+                    { quarter: 'Q3 \'24', source: 'Organic Search', rep: 'Rep A', campaign: 'Product X Launch Campaign', rate: 12 },
+                    { quarter: 'Q3 \'24', source: 'Paid Ads', rep: 'Rep B', campaign: 'Product X Launch Campaign', rate: 8 },
+                    { quarter: 'Q3 \'24', source: 'Referrals', rep: 'Rep C', campaign: 'Product X Launch Campaign', rate: 18 },
+                    { quarter: 'Q3 \'24', source: 'Events', rep: 'Rep D', campaign: 'Product X Launch Campaign', rate: 10 },
+                    { quarter: 'Q3 \'24', source: 'Content Syndication', rep: 'Rep A', campaign: 'Product X Launch Campaign', rate: 7 },
+                    // Q4 '24 Data
+                    { quarter: 'Q4 \'24', source: 'Organic Search', rep: 'Rep A', campaign: 'Product X Retargeting', rate: 11 },
+                    { quarter: 'Q4 \'24', source: 'Paid Ads', rep: 'Rep B', campaign: 'Product X Retargeting', rate: 7 },
+                    { quarter: 'Q4 \'24', source: 'Referrals', rep: 'Rep C', campaign: 'Product X Retargeting', rate: 16 },
+                    { quarter: 'Q4 \'24', source: 'Events', rep: 'Rep D', campaign: 'Product X Retargeting', rate: 9 },
+                    { quarter: 'Q4 \'24', source: 'Content Syndication', rep: 'Rep A', campaign: 'Product X Content Series', rate: 6 },
+                    // Q1 '25 Data
+                    { quarter: 'Q1 \'25', source: 'Organic Search', rep: 'Rep A', campaign: 'Product X Retargeting', rate: 9 },
+                    { quarter: 'Q1 \'25', source: 'Paid Ads', rep: 'Rep B', campaign: 'Product X Content Series', rate: 5 },
+                    { quarter: 'Q1 \'25', source: 'Referrals', rep: 'Rep C', campaign: 'Product X Content Series', rate: 14 },
+                    { quarter: 'Q1 \'25', source: 'Events', rep: 'Rep D', campaign: 'Product X Content Series', rate: 7 },
+                    { quarter: 'Q1 \'25', source: 'Content Syndication', rep: 'Rep B', campaign: 'Product X Content Series', rate: 3 },
+                    // Q2 '25 Data
+                    { quarter: 'Q2 \'25', source: 'Organic Search', rep: 'Rep A', campaign: 'Product X Content Series', rate: 8 },
+                    { quarter: 'Q2 \'25', source: 'Paid Ads', rep: 'Rep B', campaign: 'Product X Content Series', rate: 4 },
+                    { quarter: 'Q2 \'25', source: 'Referrals', rep: 'Rep C', campaign: 'Product X Retargeting', rate: 13 },
+                    { quarter: 'Q2 \'25', source: 'Events', rep: 'Rep D', campaign: 'Product X Retargeting', rate: 6 },
+                    { quarter: 'Q2 \'25', source: 'Content Syndication', rep: 'Rep B', campaign: 'Product X Content Series', rate: 2 },
+                ],
+                disqualificationReasons: [
+                    { quarter: 'Q3 \'24', reason: 'Not a good fit', count: 25 }, { quarter: 'Q3 \'24', reason: 'No budget', count: 20 }, { quarter: 'Q3 \'24', reason: 'No authority', count: 18 }, { quarter: 'Q3 \'24', reason: 'Not responsive', count: 12 }, { quarter: 'Q3 \'24', reason: 'Already solved', count: 8 },
+                    { quarter: 'Q4 \'24', reason: 'Not a good fit', count: 28 }, { quarter: 'Q4 \'24', reason: 'No budget', count: 22 }, { quarter: 'Q4 \'24', reason: 'No authority', count: 19 }, { quarter: 'Q4 \'24', reason: 'Not responsive', count: 14 }, { quarter: 'Q4 \'24', reason: 'Already solved', count: 9 },
+                    { quarter: 'Q1 \'25', reason: 'Not a good fit', count: 32 }, { quarter: 'Q1 \'25', reason: 'No budget', count: 26 }, { quarter: 'Q1 \'25', reason: 'No authority', count: 21 }, { quarter: 'Q1 \'25', reason: 'Not responsive', count: 16 }, { quarter: 'Q1 \'25', reason: 'Already solved', count: 11 },
+                    { quarter: 'Q2 \'25', reason: 'Not a good fit', count: 30 }, { quarter: 'Q2 \'25', reason: 'No budget', count: 25 }, { quarter: 'Q2 \'25', reason: 'No authority', count: 20 }, { quarter: 'Q2 \'25', reason: 'Not responsive', count: 15 }, { quarter: 'Q2 \'25', reason: 'Already solved', count: 10 },
+                ],
+                leadScores: [
+                    { quarter: 'Q3 \'24', scoreRange: '0-20', count: 350 }, { quarter: 'Q3 \'24', scoreRange: '21-40', count: 450 }, { quarter: 'Q3 \'24', scoreRange: '41-60', count: 400 }, { quarter: 'Q3 \'24', scoreRange: '61-80', count: 250 }, { quarter: 'Q3 \'24', scoreRange: '81-100', count: 100 },
+                    { quarter: 'Q4 \'24', scoreRange: '0-20', count: 400 }, { quarter: 'Q4 \'24', scoreRange: '21-40', count: 500 }, { quarter: 'Q4 \'24', scoreRange: '41-60', count: 350 }, { quarter: 'Q4 \'24', scoreRange: '61-80', count: 200 }, { quarter: 'Q4 \'24', scoreRange: '81-100', count: 75 },
+                    { quarter: 'Q1 \'25', scoreRange: '0-20', count: 500 }, { quarter: 'Q1 \'25', scoreRange: '21-40', count: 600 }, { quarter: 'Q1 \'25', scoreRange: '41-60', count: 300 }, { quarter: 'Q1 \'25', scoreRange: '61-80', count: 120 }, { quarter: 'Q1 \'25', scoreRange: '81-100', count: 30 },
+                    { quarter: 'Q2 \'25', scoreRange: '0-20', count: 450 }, { quarter: 'Q2 \'25', scoreRange: '21-40', count: 550 }, { quarter: 'Q2 \'25', scoreRange: '41-60', count: 300 }, { quarter: 'Q2 \'25', scoreRange: '61-80', count: 150 }, { quarter: 'Q2 \'25', scoreRange: '81-100', count: 50 },
+                ],
+            };
+
+            let conversionTrendChart, sourceChart, repChart, campaignChart, disqualificationChart, leadScoreChart;
+
+            const quarterFilter = document.getElementById('quarterFilter');
+            const repFilter = document.getElementById('repFilter');
+            const sourceFilter = document.getElementById('sourceFilter');
+            const campaignFilter = document.getElementById('campaignFilter');
+
+            function updateKPIs(selectedQuarter) {
+                const kpi = rawData.kpiData[selectedQuarter];
+                if (kpi) {
+                    document.getElementById('kpiLeadVolume').textContent = kpi.leadVolume.toLocaleString();
+                    document.getElementById('kpiLeadVolumePrev').textContent = kpi.prevLeadVolume.toLocaleString();
+                    const leadVolumeDelta = ((kpi.leadVolume - kpi.prevLeadVolume) / kpi.prevLeadVolume * 100).toFixed(2);
+                    document.getElementById('kpiLeadVolumeDelta').textContent = `${leadVolumeDelta}%`;
+                    document.getElementById('kpiLeadVolumeDelta').className = leadVolumeDelta < 0 ? 'kpi-delta-negative' : 'kpi-delta-positive';
+
+                    document.getElementById('kpiResponseTime').textContent = `${kpi.responseTime.toFixed(1)} hrs`;
+                    document.getElementById('kpiResponseTimePrev').textContent = `${kpi.prevResponseTime.toFixed(1)}`;
+                    const responseTimeDelta = ((kpi.responseTime - kpi.prevResponseTime) / kpi.prevResponseTime * 100).toFixed(0);
+                    document.getElementById('kpiResponseTimeDelta').textContent = `${responseTimeDelta}% Slower`;
+                    document.getElementById('kpiResponseTimeDelta').className = responseTimeDelta > 0 ? 'kpi-delta-negative' : 'kpi-delta-positive';
+
+                    document.getElementById('kpiCurrentConversion').textContent = `${kpi.currentConversion}%`;
+                    const conversionDelta = (15 - kpi.currentConversion);
+                    document.getElementById('kpiConversionDelta').textContent = `${conversionDelta} p.p. Below Goal`;
+                    document.getElementById('kpiConversionDelta').className = conversionDelta > 0 ? 'kpi-delta-negative' : 'kpi-delta-positive';
+                }
+            }
+
+            function applyFilters() {
+                const selectedQuarter = quarterFilter.value;
+                const selectedRep = repFilter.value;
+                const selectedSource = sourceFilter.value;
+                const selectedCampaign = campaignFilter.value;
+
+                updateKPIs(selectedQuarter);
+
+                // Filter detailed conversion data for Source, Rep, Campaign charts
+                let filteredDetailedData = rawData.detailedConversion.filter(d => 
+                    d.quarter === selectedQuarter &&
+                    (selectedRep === 'All' || d.rep === selectedRep) &&
+                    (selectedSource === 'All' || d.source === selectedSource) &&
+                    (selectedCampaign === 'All' || d.campaign === selectedCampaign)
+                );
+
+                // Aggregate data for Source Chart
+                const sourceAggregated = filteredDetailedData.reduce((acc, item) => {
+                    acc[item.source] = (acc[item.source] || { sum: 0, count: 0 });
+                    acc[item.source].sum += item.rate;
+                    acc[item.source].count += 1;
+                    return acc;
+                }, {});
+                const sourceLabels = Object.keys(sourceAggregated).map(label => wrapLabel(label));
+                const sourceData = Object.values(sourceAggregated).map(val => (val.sum / val.count).toFixed(1));
+                const sourceColors = sourceLabels.map((label, index) => {
+                    const originalLabel = Array.isArray(label) ? label.join(' ') : label;
+                    if (originalLabel === 'Paid Ads' || originalLabel === 'Content Syndication') return PALETTE.red;
+                    if (originalLabel === 'Referrals') return PALETTE.blue1;
+                    return PALETTE.blue2;
+                });
+                updateChart(sourceChart, sourceLabels, sourceData, sourceColors);
+
+                // Aggregate data for Rep Chart
+                const repAggregated = filteredDetailedData.reduce((acc, item) => {
+                    acc[item.rep] = (acc[item.rep] || { sum: 0, count: 0 });
+                    acc[item.rep].sum += item.rate;
+                    acc[item.rep].count += 1;
+                    return acc;
+                }, {});
+                const repLabels = Object.keys(repAggregated);
+                const repData = Object.values(repAggregated).map(val => (val.sum / val.count).toFixed(1));
+                const repColors = repLabels.map(label => {
+                    if (label === 'Rep B' || label === 'Rep D') return PALETTE.red;
+                    if (label === 'Rep C') return PALETTE.blue1;
+                    return PALETTE.blue2;
+                });
+                updateChart(repChart, repLabels, repData, repColors);
+
+                // Aggregate data for Campaign Chart
+                const campaignAggregated = filteredDetailedData.reduce((acc, item) => {
+                    acc[item.campaign] = (acc[item.campaign] || { sum: 0, count: 0 });
+                    acc[item.campaign].sum += item.rate;
+                    acc[item.campaign].count += 1;
+                    return acc;
+                }, {});
+                const campaignLabels = Object.keys(campaignAggregated).map(label => wrapLabel(label));
+                const campaignData = Object.values(campaignAggregated).map(val => (val.sum / val.count).toFixed(1));
+                const campaignColors = campaignLabels.map((label, index) => {
+                    const originalLabel = Array.isArray(label) ? label.join(' ') : label;
+                    if (originalLabel === 'Product X Content Series') return PALETTE.red;
+                    if (originalLabel === 'Product X Retargeting') return PALETTE.yellow;
+                    return PALETTE.blue1;
+                });
+                updateChart(campaignChart, campaignLabels, campaignData, campaignColors);
+
+                // Filter data for Disqualification Chart
+                const filteredDisqualification = rawData.disqualificationReasons.filter(d => d.quarter === selectedQuarter);
+                const dqLabels = filteredDisqualification.map(d => d.reason);
+                const dqData = filteredDisqualification.map(d => d.count);
+                const dqColors = [PALETTE.red, PALETTE.yellow, PALETTE.blue2, PALETTE.blue3, PALETTE.blue1]; // Keep consistent colors
+                updateChart(disqualificationChart, dqLabels, dqData, dqColors);
+
+                // Filter data for Lead Score Chart
+                const filteredLeadScore = rawData.leadScores.filter(d => d.quarter === selectedQuarter);
+                const lsLabels = filteredLeadScore.map(d => d.scoreRange);
+                const lsData = filteredLeadScore.map(d => d.count);
+                const lsColors = [PALETTE.red, PALETTE.yellow, PALETTE.blue2, PALETTE.blue1, PALETTE.green]; // Keep consistent colors
+                updateChart(leadScoreChart, lsLabels, lsData, lsColors);
+            }
+
+            function updateChart(chartInstance, labels, data, colors) {
+                chartInstance.data.labels = labels;
+                chartInstance.data.datasets[0].data = data;
+                if (colors) {
+                    chartInstance.data.datasets[0].backgroundColor = colors;
+                }
+                chartInstance.update();
+            }
+
+            // Initial chart creations
+            conversionTrendChart = createConversionTrendChart();
+            sourceChart = createSourceChart();
+            repChart = createRepChart();
+            campaignChart = createCampaignChart();
+            disqualificationChart = createDisqualificationChart();
+            leadScoreChart = createLeadScoreChart();
+
+            // Event listeners for filters
+            quarterFilter.addEventListener('change', applyFilters);
+            repFilter.addEventListener('change', applyFilters);
+            sourceFilter.addEventListener('change', applyFilters);
+            campaignFilter.addEventListener('change', applyFilters);
+
+            // Initial application of filters to set default view (Q2 '25)
+            applyFilters();
+
+            function createConversionTrendChart() {
+                const ctx = document.getElementById('conversionTrendChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: rawData.conversionTrend.map(d => d.quarter),
+                        datasets: [{
+                            label: 'Conversion Rate',
+                            data: rawData.conversionTrend.map(d => d.rate),
+                            borderColor: PALETTE.red,
+                            backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                            fill: true,
+                            tension: 0.3,
+                        }, {
+                            label: 'Goal',
+                            data: [15, 15, 15, 15],
+                            borderColor: PALETTE.blue1,
+                            borderDash: [5, 5],
+                            fill: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Conversion Rate (%)' },
+                                grid: { color: GRID_COLOR },
+                            },
+                             x: { grid: { display: false } }
+                        },
+                        ...tooltipConfig
+                    }
+                });
+            }
+
+            function createSourceChart() {
+                const ctx = document.getElementById('sourceChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [], // Populated by applyFilters
+                        datasets: [{
+                            label: 'Conversion Rate (%)',
+                            data: [], // Populated by applyFilters
+                            backgroundColor: [], // Populated by applyFilters
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, ...tooltipConfig.plugins },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Conversion Rate (%)' },
+                                grid: { color: GRID_COLOR },
+                            },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            function createRepChart() {
+                const ctx = document.getElementById('repChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [], // Populated by applyFilters
+                        datasets: [{
+                            label: 'Conversion Rate (%)',
+                            data: [], // Populated by applyFilters
+                            backgroundColor: [], // Populated by applyFilters
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, ...tooltipConfig.plugins },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Conversion Rate (%)' },
+                                grid: { color: GRID_COLOR },
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            function createCampaignChart() {
+                const ctx = document.getElementById('campaignChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [], // Populated by applyFilters
+                        datasets: [{
+                            label: 'Conversion Rate (%)',
+                            data: [], // Populated by applyFilters
+                            backgroundColor: [], // Populated by applyFilters
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, ...tooltipConfig.plugins },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Conversion Rate (%)' },
+                                grid: { color: GRID_COLOR },
+                            },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+            
+            function createDisqualificationChart() {
+                const ctx = document.getElementById('disqualificationChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [], // Populated by applyFilters
+                        datasets: [{
+                            label: 'Disqualification Reason',
+                            data: [], // Populated by applyFilters
+                            backgroundColor: [], // Populated by applyFilters
+                            borderColor: '#fff',
+                            borderWidth: 2,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            ...tooltipConfig.plugins
+                        }
+                    }
+                });
+            }
+
+            function createLeadScoreChart() {
+                const ctx = document.getElementById('leadScoreChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [], // Populated by applyFilters
+                        datasets: [{
+                            label: 'Number of Leads',
+                            data: [], // Populated by applyFilters
+                            backgroundColor: [], // Populated by applyFilters
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, ...tooltipConfig.plugins },
+                        scales: {
+                             y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Number of Leads' },
+                                grid: { color: GRID_COLOR },
+                            },
+                             x: { 
+                                title: { display: true, text: 'Lead Score Tier' },
+                                grid: { display: false } 
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
